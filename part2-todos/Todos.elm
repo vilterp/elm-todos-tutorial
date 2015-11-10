@@ -66,83 +66,19 @@ type Action
 
 update : Action -> Model -> Model
 update action model =
-  case action of
-    AddTodo ->
-      let
-        newTodo =
-          { text = model.currentText
-          , id = model.latestId
-          , done = False
-          }
-      in
-        { model
-            | todos <- newTodo :: model.todos
-            , currentText <- ""
-            , latestId <- model.latestId + 1
-        }
-
-    MarkDone id done ->
-      markDone id done model
-
-    Delete id ->
-      delete id model
-
-    UpdateText newText ->
-      { model | currentText <- newText }
-
-    NoOp ->
-      model
+  Debug.crash "TODO"
 
 
 -- view
 
 view : Signal.Address Action -> Model -> Html
 view addr model =
-  div
-    []
-    [ input
-        [ type' "text"
-        , placeholder "What needs to be done?"
-        , onInput addr (\text -> UpdateText text)
-        , onKeyUp addr (\keyCode ->
-            if keyCode == 13 then AddTodo else NoOp)
-        , value model.currentText
-        ]
-        []
-    , ul
-        []
-        (List.map (viewTodo addr) model.todos)
-    ]
+  Debug.crash "TODO"
 
 
 viewTodo : Signal.Address Action -> Todo -> Html
 viewTodo addr todo =
-  li
-    []
-    ( [ input
-        [ type' "checkbox"
-        , checked todo.done
-        , on
-            "change"
-            targetChecked
-            (\checked -> Signal.message addr (MarkDone todo.id checked))
-        ]
-        []
-      , span
-          [ style
-              [ ("text-decoration", if todo.done then "line-through" else "none") ]
-          ]
-          [ text todo.text ]
-      ] ++
-      if todo.done then
-        [ text " "
-        , a
-          [ onClick addr (Delete todo.id) ]
-          [ text "delete" ]
-        ]
-      else
-        []
-    )
+  Debug.crash "TODO"
 
 
 -- wiring

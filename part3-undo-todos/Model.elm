@@ -68,50 +68,27 @@ add todo todoList =
 
 updateList : (List Todo -> List Todo) -> UndoTodoList -> UndoTodoList
 updateList updateFun undoTodoList =
-  let
-    newList =
-      updateFun undoTodoList.currentState
-  in
-    { pastStates = undoTodoList.currentState :: undoTodoList.pastStates
-    , currentState = newList
-    , futureStates = []
-    }
+  Debug.crash "TODO"
 
 
 undo : UndoTodoList -> Maybe UndoTodoList
 undo undoTodoList =
-  case undoTodoList.pastStates of
-    mostRecentState :: furtherBackStates ->
-      { pastStates = furtherBackStates
-      , currentState = mostRecentState
-      , futureStates =  undoTodoList.currentState :: undoTodoList.futureStates
-      } |> Just
-
-    _ ->
-      Nothing
+  Debug.crash "TODO"
 
 
 redo : UndoTodoList -> Maybe UndoTodoList
 redo undoTodoList =
-  case undoTodoList.futureStates of
-    nextStateForward :: furtherForwardStates ->
-      { pastStates = undoTodoList.currentState :: undoTodoList.pastStates
-      , currentState = nextStateForward
-      , futureStates = furtherForwardStates
-      } |> Just
-
-    _ ->
-      Nothing
+  Debug.crash "TODO"
 
 
 canUndo : UndoTodoList -> Bool
 canUndo undoTodoList =
-  not (List.isEmpty undoTodoList.pastStates)
+  Debug.crash "TODO"
 
 
 canRedo : UndoTodoList -> Bool
 canRedo undoTodoList =
-  not (List.isEmpty undoTodoList.futureStates)
+  Debug.crash "TODO"
 
 
 getOrCrash : String -> Maybe a -> a
