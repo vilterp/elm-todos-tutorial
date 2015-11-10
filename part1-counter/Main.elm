@@ -44,8 +44,8 @@ update action model =
 
 -- wiring
 
-app : StartApp.Config Model Action
-app =
+config : StartApp.Config Model Action
+config =
   { model = 0
   , view = view
   , update = update
@@ -54,4 +54,4 @@ app =
 
 main : Signal Html
 main =
-  StartApp.start app
+  StartApp.start config

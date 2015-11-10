@@ -147,8 +147,8 @@ viewTodo addr todo =
 
 -- wiring
 
-app : StartApp.Config Model Action
-app =
+config : StartApp.Config Model Action
+config =
   { model = initialModel
   , view = view
   , update = update
@@ -157,4 +157,4 @@ app =
 
 main : Signal Html
 main =
-  StartApp.start app
+  StartApp.start config
