@@ -1,6 +1,6 @@
 # Elm Todos Tutorial
 
-Multiple stages of a todo list, for learning Elm. In `master` the juicy bits have been deleted to be filled in in a workshop; check the `solved` branch for working versions.
+Multiple stages of a todo list, for learning Elm. In `master` the juicy bits have been deleted to be filled in during a workshop; check the `solved` branch for working versions.
 
 1. Install [Elm 0.15.1](http://elm-lang.org/install)
 2. For each stage you do:
