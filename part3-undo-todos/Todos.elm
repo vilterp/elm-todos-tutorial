@@ -18,8 +18,8 @@ type Action
   | AddTodo
   | MarkDone TodoId Bool
   | Delete TodoId
-  | Undo
-  | Redo
+  -- Undo
+  -- Redo
   | NoOp
 
 
@@ -49,11 +49,7 @@ update action model =
     UpdateText newText ->
       { model | currentText = newText }
 
-    Undo ->
-      { model | todos = undo model.todos |> getOrCrash "couldn't undo" }
-
-    Redo ->
-      { model | todos = redo model.todos |> getOrCrash "couldn't redo" }
+    -- insert undo & redo
 
     NoOp ->
       model

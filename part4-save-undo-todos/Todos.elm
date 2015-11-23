@@ -24,16 +24,44 @@ type Action
   | Delete TodoId
   | Undo
   | Redo
-  | Save
-  | SaveFailed
-  | SaveSucceeded
-  | ClearFlashMessage FlashMessageId
+  --| Save
+  --| SaveFailed
+  --| SaveSucceeded
+  --| ClearFlashMessage FlashMessageId
   | NoOp
 
 
 update : Action -> Model -> (Model, Effects Action)
 update action model =
-  Debug.crash "TODO"
+  case action of
+    AddTodo ->
+      let
+        newTodo =
+          { text = model.currentText
+          , id = model.latestId
+          , done = False
+          }
+      in
+        { model
+            | todos = updateList (\todos -> newTodo :: todos) model.todos
+            , currentText = ""
+            , latestId = model.latestId + 1
+        }
+
+    MarkDone id done ->
+      { model | todos = updateList (\todos -> markDone id done todos) model.todos }
+
+    Delete id ->
+      { model | todos = updateList (\todos -> delete id todos) model.todos }
+
+    UpdateText newText ->
+      { model | currentText = newText }
+
+    Undo ->
+      { model | todos = undo model.todos |> getOrCrash "couldn't undo" }
+
+    Redo ->
+      { model | todos = redo model.todos |> getOrCrash "couldn't redo" }
 
 
 clearAfterTimeout : FlashMessageId -> Task x Action
@@ -45,12 +73,64 @@ clearAfterTimeout id =
 
 view : Signal.Address Action -> Model -> Html
 view addr model =
-  Debug.crash "TODO"
+  div
+    []
+    [ input
+        [ type' "text"
+        , placeholder "What needs to be done?"
+        , onInput addr (\text -> UpdateText text)
+        , onKeyUp addr (\keyCode ->
+            if keyCode == 13 then AddTodo else NoOp)
+        , value model.currentText
+        ]
+        []
+    , ul
+        []
+        (List.map (viewTodo addr) model.todos.currentState)
+    , div
+        []
+        [ button
+            [ onClick addr Undo
+            , disabled (not <| canUndo model.todos)
+            ]
+            [ text "Undo" ]
+        , button
+            [ onClick addr Redo
+            , disabled (not <| canRedo model.todos)
+            ]
+            [ text "Redo" ]
+        ]
+    ]
 
 
 viewTodo : Signal.Address Action -> Todo -> Html
 viewTodo addr todo =
-  Debug.crash "TODO"
+  li
+    []
+    ( [ input
+        [ type' "checkbox"
+        , checked todo.done
+        , on
+            "change"
+            targetChecked
+            (\checked -> Signal.message addr (MarkDone todo.id checked))
+        ]
+        []
+      , span
+          [ style
+              [ ("text-decoration", if todo.done then "line-through" else "none") ]
+          ]
+          [ text todo.text ]
+      ] ++
+      if todo.done then
+        [ text " "
+        , a
+          [ onClick addr (Delete todo.id) ]
+          [ text "delete" ]
+        ]
+      else
+        []
+    )
 
 
 -- wiring
