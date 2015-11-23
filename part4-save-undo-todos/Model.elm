@@ -81,7 +81,7 @@ markDone id done todos =
   let
     update todo =
       if todo.id == id then
-        { todo | done <- done }
+        { todo | done = done }
       else
         todo
   in
@@ -181,8 +181,8 @@ addFlash text model =
       }
   in
     ( { model
-          | latestFlashId <- model.latestFlashId + 1
-          , flashMessages <- newFlash :: model.flashMessages
+          | latestFlashId = model.latestFlashId + 1
+          , flashMessages = newFlash :: model.flashMessages
       }
     , model.latestFlashId
     )
@@ -190,6 +190,6 @@ addFlash text model =
 
 clearFlash : FlashMessageId -> Model -> Model
 clearFlash id model =
-  { model | flashMessages <-
+  { model | flashMessages =
       List.filter (\msg -> msg.id /= id) model.flashMessages
   }

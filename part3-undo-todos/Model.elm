@@ -48,7 +48,7 @@ markDone id done todos =
   let
     update todo =
       if todo.id == id then
-        { todo | done <- done }
+        { todo | done = done }
       else
         todo
   in

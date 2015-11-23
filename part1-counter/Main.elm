@@ -1,6 +1,7 @@
 module Main where
 
 import Signal exposing (Signal)
+import Debug
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -20,26 +21,12 @@ type Action
 
 view : Signal.Address Action -> Model -> Html
 view addr model =
-  div
-    []
-    [ button
-        [ onClick addr Decrement ]
-        [ text "-" ]
-    , text (toString model)
-    , button
-        [ onClick addr Increment ]
-        [ text "+" ]
-    ]
+  Debug.crash "TODO"
 
 
 update : Action -> Model -> Model
 update action model =
-  case action of
-    Increment ->
-      model + 1
-
-    Decrement ->
-      model - 1
+  Debug.crash "TODO"
 
 
 -- wiring

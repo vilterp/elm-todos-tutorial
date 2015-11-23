@@ -42,16 +42,16 @@ markDone id done model =
   let
     update todo =
       if todo.id == id then
-        { todo | done <- done }
+        { todo | done = done }
       else
         todo
   in
-    { model | todos <- List.map update model.todos }
+    { model | todos = List.map update model.todos }
 
 
 delete : TodoId -> Model -> Model
 delete id model =
-  { model | todos <- List.filter (\todo -> todo.id /= id) model.todos }
+  { model | todos = List.filter (\todo -> todo.id /= id) model.todos }
 
 
 -- controller
@@ -76,9 +76,9 @@ update action model =
           }
       in
         { model
-            | todos <- newTodo :: model.todos
-            , currentText <- ""
-            , latestId <- model.latestId + 1
+            | todos = newTodo :: model.todos
+            , currentText = ""
+            , latestId = model.latestId + 1
         }
 
     MarkDone id done ->
@@ -88,7 +88,7 @@ update action model =
       delete id model
 
     UpdateText newText ->
-      { model | currentText <- newText }
+      { model | currentText = newText }
 
     NoOp ->
       model
@@ -147,8 +147,8 @@ viewTodo addr todo =
 
 -- wiring
 
-config : StartApp.Config Model Action
-config =
+app : StartApp.Config Model Action
+app =
   { model = initialModel
   , view = view
   , update = update
@@ -157,4 +157,4 @@ config =
 
 main : Signal Html
 main =
-  StartApp.start config
+  StartApp.start app
