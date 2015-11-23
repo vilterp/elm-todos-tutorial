@@ -2,7 +2,7 @@
 
 Multiple stages of a todo list, for learning Elm. In `master` the juicy bits have been deleted to be filled in during a workshop; check the `solved` branch for working versions.
 
-1. Install [Elm 0.15.1](http://elm-lang.org/install)
+1. Install Elm 0.16, using the [binary installer](http://elm-lang.org/install) or `npm install -g elm`
 2. For each stage you do:
   1. `cd` into the directory for a stage
   2. `$ elm-package install` (Last stage requires `npm install` too)
