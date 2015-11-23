@@ -66,13 +66,13 @@ update : Action -> Order -> Order
 update action order =
   case action of
     ChipUpdate hasChips ->
-      { order | chips <- hasChips }
+      { order | chips = hasChips }
 
     BurritoAction burritoAction ->
-      { order | burrito <- updateBurrito burritoAction order.burrito }
+      { order | burrito = updateBurrito burritoAction order.burrito }
 
     DrinkAction drinkAction ->
-      { order | drink <- updateDrink drinkAction order.drink }
+      { order | drink = updateDrink drinkAction order.drink }
 
 
 
@@ -122,10 +122,10 @@ updateBurrito : BurritoAction -> Burrito -> Burrito
 updateBurrito action burrito =
   case action of
     RiceUpdate rice ->
-      { burrito | rice <- rice }
+      { burrito | rice = rice }
 
     ContainerUpdate container ->
-      { burrito | container <- container }
+      { burrito | container = container }
 
 
 viewBurrito : Signal.Address BurritoAction -> Burrito -> Html

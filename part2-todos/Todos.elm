@@ -43,16 +43,16 @@ markDone id done model =
   let
     update todo =
       if todo.id == id then
-        { todo | done <- done }
+        { todo | done = done }
       else
         todo
   in
-    { model | todos <- List.map update model.todos }
+    { model | todos = List.map update model.todos }
 
 
 delete : TodoId -> Model -> Model
 delete id model =
-  { model | todos <- List.filter (\todo -> todo.id /= id) model.todos }
+  { model | todos = List.filter (\todo -> todo.id /= id) model.todos }
 
 
 -- controller

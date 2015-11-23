@@ -35,25 +35,25 @@ update action model =
           }
       in
         { model
-            | todos <- updateList (\todos -> newTodo :: todos) model.todos
-            , currentText <- ""
-            , latestId <- model.latestId + 1
+            | todos = updateList (\todos -> newTodo :: todos) model.todos
+            , currentText = ""
+            , latestId = model.latestId + 1
         }
 
     MarkDone id done ->
-      { model | todos <- updateList (\todos -> markDone id done todos) model.todos }
+      { model | todos = updateList (\todos -> markDone id done todos) model.todos }
 
     Delete id ->
-      { model | todos <- updateList (\todos -> delete id todos) model.todos }
+      { model | todos = updateList (\todos -> delete id todos) model.todos }
 
     UpdateText newText ->
-      { model | currentText <- newText }
+      { model | currentText = newText }
 
     Undo ->
-      { model | todos <- undo model.todos |> getOrCrash "couldn't undo" }
+      { model | todos = undo model.todos |> getOrCrash "couldn't undo" }
 
     Redo ->
-      { model | todos <- redo model.todos |> getOrCrash "couldn't redo" }
+      { model | todos = redo model.todos |> getOrCrash "couldn't redo" }
 
     NoOp ->
       model
