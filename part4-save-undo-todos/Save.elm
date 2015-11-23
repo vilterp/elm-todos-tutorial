@@ -35,7 +35,7 @@ save todos =
     Http.defaultSettings
     { verb = "POST"
     , headers = [("Content-Type", "application/json")]
-    , url = "//localhost:8088/saveTodos"
+    , url = "/saveTodos"
     , body = Http.string (encode todos)
     }
   |> Task.mapError toString
