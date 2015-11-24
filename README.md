@@ -2,6 +2,8 @@
 
 Multiple stages of a todo list, for learning Elm. In `master` the juicy bits have been deleted to be filled in during a workshop; check the `solved` branch for working versions.
 
+[Intro Slides](https://docs.google.com/presentation/d/1rmTOhnV3bXqj9Oonwp7ry_YuP-MhLKYpm0TZ-t4rr6k/edit?usp=sharing) (add some context on Elm)
+
 ## Prereqs
 
 - Install Elm 0.16, using the [binary installer](http://elm-lang.org/install) or `npm install -g elm`
